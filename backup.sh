@@ -1,3 +1,3 @@
 #! /bin/sh
 
-pg_dump <db_name> > "$(date +'%Y-%m-%d')".bak
+pg_dump oweit > backup/"$(date +'%Y-%m-%d')".bak

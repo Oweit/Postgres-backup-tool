@@ -1,0 +1,1858 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.3
+-- Dumped by pg_dump version 12.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO oweituser;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO oweituser;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO oweituser;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO oweituser;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO oweituser;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO oweituser;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id uuid NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO oweituser;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO oweituser;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO oweituser;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO oweituser;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO oweituser;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO oweituser;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO oweituser;
+
+--
+-- Name: group_group; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.group_group (
+    name character varying(299) NOT NULL,
+    id uuid NOT NULL,
+    "groupImage_id" uuid
+);
+
+
+ALTER TABLE public.group_group OWNER TO oweituser;
+
+--
+-- Name: group_groupmembermodel; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.group_groupmembermodel (
+    id integer NOT NULL,
+    "groupAdmin" boolean NOT NULL,
+    group_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    notifications boolean NOT NULL,
+    "notificationsEditingId" uuid NOT NULL,
+    "slackName" character varying(200) NOT NULL,
+    "slackId" character varying(200) NOT NULL,
+    "notificationType" character varying(2) NOT NULL
+);
+
+
+ALTER TABLE public.group_groupmembermodel OWNER TO oweituser;
+
+--
+-- Name: group_groupmembermodel_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.group_groupmembermodel_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.group_groupmembermodel_id_seq OWNER TO oweituser;
+
+--
+-- Name: group_groupmembermodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.group_groupmembermodel_id_seq OWNED BY public.group_groupmembermodel.id;
+
+
+--
+-- Name: images_image; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.images_image (
+    id uuid NOT NULL,
+    uploaded_at timestamp with time zone NOT NULL,
+    upload character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.images_image OWNER TO oweituser;
+
+--
+-- Name: members_membertokenmodel; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.members_membertokenmodel (
+    id integer NOT NULL,
+    token character varying(200) NOT NULL,
+    date date NOT NULL,
+    user_id uuid NOT NULL
+);
+
+
+ALTER TABLE public.members_membertokenmodel OWNER TO oweituser;
+
+--
+-- Name: members_membertokenmodel_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.members_membertokenmodel_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.members_membertokenmodel_id_seq OWNER TO oweituser;
+
+--
+-- Name: members_membertokenmodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.members_membertokenmodel_id_seq OWNED BY public.members_membertokenmodel.id;
+
+
+--
+-- Name: members_memberverificationtokenmodel; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.members_memberverificationtokenmodel (
+    id integer NOT NULL,
+    token character varying(200) NOT NULL,
+    date date NOT NULL,
+    user_id uuid NOT NULL
+);
+
+
+ALTER TABLE public.members_memberverificationtokenmodel OWNER TO oweituser;
+
+--
+-- Name: members_memberverificationtokenmodel_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.members_memberverificationtokenmodel_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.members_memberverificationtokenmodel_id_seq OWNER TO oweituser;
+
+--
+-- Name: members_memberverificationtokenmodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.members_memberverificationtokenmodel_id_seq OWNED BY public.members_memberverificationtokenmodel.id;
+
+
+--
+-- Name: oweAuth_user; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public."oweAuth_user" (
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    id uuid NOT NULL,
+    name character varying(225) NOT NULL,
+    email character varying(120) NOT NULL,
+    is_active boolean NOT NULL,
+    is_staff boolean NOT NULL,
+    is_admin boolean NOT NULL,
+    dummy boolean NOT NULL,
+    verified boolean NOT NULL,
+    "createdAt" timestamp with time zone NOT NULL,
+    secret_admin_token character varying(225) NOT NULL
+);
+
+
+ALTER TABLE public."oweAuth_user" OWNER TO oweituser;
+
+--
+-- Name: oweAuth_user_groups; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public."oweAuth_user_groups" (
+    id integer NOT NULL,
+    user_id uuid NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public."oweAuth_user_groups" OWNER TO oweituser;
+
+--
+-- Name: oweAuth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public."oweAuth_user_groups_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."oweAuth_user_groups_id_seq" OWNER TO oweituser;
+
+--
+-- Name: oweAuth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public."oweAuth_user_groups_id_seq" OWNED BY public."oweAuth_user_groups".id;
+
+
+--
+-- Name: oweAuth_user_user_permissions; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public."oweAuth_user_user_permissions" (
+    id integer NOT NULL,
+    user_id uuid NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public."oweAuth_user_user_permissions" OWNER TO oweituser;
+
+--
+-- Name: oweAuth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public."oweAuth_user_user_permissions_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."oweAuth_user_user_permissions_id_seq" OWNER TO oweituser;
+
+--
+-- Name: oweAuth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public."oweAuth_user_user_permissions_id_seq" OWNED BY public."oweAuth_user_user_permissions".id;
+
+
+--
+-- Name: penalty_penalty; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.penalty_penalty (
+    id uuid NOT NULL,
+    group_id uuid,
+    reason_id uuid,
+    user_id uuid,
+    multiplier integer NOT NULL,
+    punishment integer NOT NULL,
+    date date NOT NULL,
+    archive_id uuid
+);
+
+
+ALTER TABLE public.penalty_penalty OWNER TO oweituser;
+
+--
+-- Name: penalty_penaltyarchive; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.penalty_penaltyarchive (
+    "startDate" date NOT NULL,
+    "endDate" date NOT NULL,
+    id uuid NOT NULL,
+    "createdBy_id" uuid,
+    group_id uuid,
+    "registeredDate" date NOT NULL
+);
+
+
+ALTER TABLE public.penalty_penaltyarchive OWNER TO oweituser;
+
+--
+-- Name: reason_reason; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.reason_reason (
+    ranking integer NOT NULL,
+    name character varying(100) NOT NULL,
+    text character varying(1000) NOT NULL,
+    id uuid NOT NULL,
+    punishment integer NOT NULL
+);
+
+
+ALTER TABLE public.reason_reason OWNER TO oweituser;
+
+--
+-- Name: reason_reasongroupmodel; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.reason_reasongroupmodel (
+    id integer NOT NULL,
+    date date NOT NULL,
+    group_id uuid NOT NULL,
+    reason_id uuid NOT NULL,
+    "slackShortCut" character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.reason_reasongroupmodel OWNER TO oweituser;
+
+--
+-- Name: reason_reasongroupmodel_id_seq; Type: SEQUENCE; Schema: public; Owner: oweituser
+--
+
+CREATE SEQUENCE public.reason_reasongroupmodel_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.reason_reasongroupmodel_id_seq OWNER TO oweituser;
+
+--
+-- Name: reason_reasongroupmodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: oweituser
+--
+
+ALTER SEQUENCE public.reason_reasongroupmodel_id_seq OWNED BY public.reason_reasongroupmodel.id;
+
+
+--
+-- Name: slack_slackteam; Type: TABLE; Schema: public; Owner: oweituser
+--
+
+CREATE TABLE public.slack_slackteam (
+    "teamId" character varying(200) NOT NULL,
+    "teamName" character varying(100) NOT NULL,
+    group_id uuid NOT NULL,
+    "createdDate" date NOT NULL,
+    "slackAuthedUser" character varying(100) NOT NULL,
+    "createByUser_id" uuid NOT NULL,
+    slack_access_token character varying(255) NOT NULL,
+    "sendMessagesToChannelsWhenMentioned" boolean NOT NULL
+);
+
+
+ALTER TABLE public.slack_slackteam OWNER TO oweituser;
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: group_groupmembermodel id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_groupmembermodel ALTER COLUMN id SET DEFAULT nextval('public.group_groupmembermodel_id_seq'::regclass);
+
+
+--
+-- Name: members_membertokenmodel id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.members_membertokenmodel ALTER COLUMN id SET DEFAULT nextval('public.members_membertokenmodel_id_seq'::regclass);
+
+
+--
+-- Name: members_memberverificationtokenmodel id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.members_memberverificationtokenmodel ALTER COLUMN id SET DEFAULT nextval('public.members_memberverificationtokenmodel_id_seq'::regclass);
+
+
+--
+-- Name: oweAuth_user_groups id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_groups" ALTER COLUMN id SET DEFAULT nextval('public."oweAuth_user_groups_id_seq"'::regclass);
+
+
+--
+-- Name: oweAuth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_user_permissions" ALTER COLUMN id SET DEFAULT nextval('public."oweAuth_user_user_permissions_id_seq"'::regclass);
+
+
+--
+-- Name: reason_reasongroupmodel id; Type: DEFAULT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.reason_reasongroupmodel ALTER COLUMN id SET DEFAULT nextval('public.reason_reasongroupmodel_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add content type	4	add_contenttype
+14	Can change content type	4	change_contenttype
+15	Can delete content type	4	delete_contenttype
+16	Can view content type	4	view_contenttype
+17	Can add session	5	add_session
+18	Can change session	5	change_session
+19	Can delete session	5	delete_session
+20	Can view session	5	view_session
+21	Can add user	6	add_user
+22	Can change user	6	change_user
+23	Can delete user	6	delete_user
+24	Can view user	6	view_user
+25	Can add group	7	add_group
+26	Can change group	7	change_group
+27	Can delete group	7	delete_group
+28	Can view group	7	view_group
+29	Can add group member model	8	add_groupmembermodel
+30	Can change group member model	8	change_groupmembermodel
+31	Can delete group member model	8	delete_groupmembermodel
+32	Can view group member model	8	view_groupmembermodel
+33	Can add penalty	9	add_penalty
+34	Can change penalty	9	change_penalty
+35	Can delete penalty	9	delete_penalty
+36	Can view penalty	9	view_penalty
+37	Can add penalty archive	10	add_penaltyarchive
+38	Can change penalty archive	10	change_penaltyarchive
+39	Can delete penalty archive	10	delete_penaltyarchive
+40	Can view penalty archive	10	view_penaltyarchive
+41	Can add reason	11	add_reason
+42	Can change reason	11	change_reason
+43	Can delete reason	11	delete_reason
+44	Can view reason	11	view_reason
+45	Can add reason group model	12	add_reasongroupmodel
+46	Can change reason group model	12	change_reasongroupmodel
+47	Can delete reason group model	12	delete_reasongroupmodel
+48	Can view reason group model	12	view_reasongroupmodel
+49	Can add member token model	13	add_membertokenmodel
+50	Can change member token model	13	change_membertokenmodel
+51	Can delete member token model	13	delete_membertokenmodel
+52	Can view member token model	13	view_membertokenmodel
+53	Can add member verification token model	14	add_memberverificationtokenmodel
+54	Can change member verification token model	14	change_memberverificationtokenmodel
+55	Can delete member verification token model	14	delete_memberverificationtokenmodel
+56	Can view member verification token model	14	view_memberverificationtokenmodel
+57	Can add slack team	15	add_slackteam
+58	Can change slack team	15	change_slackteam
+59	Can delete slack team	15	delete_slackteam
+60	Can view slack team	15	view_slackteam
+61	Can add image	16	add_image
+62	Can change image	16	change_image
+63	Can delete image	16	delete_image
+64	Can view image	16	view_image
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	oweAuth	user
+7	group	group
+8	group	groupmembermodel
+9	penalty	penalty
+10	penalty	penaltyarchive
+11	reason	reason
+12	reason	reasongroupmodel
+13	members	membertokenmodel
+14	members	memberverificationtokenmodel
+15	slack	slackteam
+16	images	image
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-01-29 00:56:35.682562+01
+2	contenttypes	0002_remove_content_type_name	2020-01-29 00:56:35.691115+01
+3	auth	0001_initial	2020-01-29 00:56:35.706418+01
+4	auth	0002_alter_permission_name_max_length	2020-01-29 00:56:35.720279+01
+5	auth	0003_alter_user_email_max_length	2020-01-29 00:56:35.72602+01
+6	auth	0004_alter_user_username_opts	2020-01-29 00:56:35.731313+01
+7	auth	0005_alter_user_last_login_null	2020-01-29 00:56:35.736425+01
+8	auth	0006_require_contenttypes_0002	2020-01-29 00:56:35.738071+01
+9	auth	0007_alter_validators_add_error_messages	2020-01-29 00:56:35.742869+01
+10	auth	0008_alter_user_username_max_length	2020-01-29 00:56:35.747808+01
+11	auth	0009_alter_user_last_name_max_length	2020-01-29 00:56:35.754206+01
+12	auth	0010_alter_group_name_max_length	2020-01-29 00:56:35.760541+01
+13	auth	0011_update_proxy_permissions	2020-01-29 00:56:35.765829+01
+14	oweAuth	0001_initial	2020-01-29 00:56:35.780951+01
+15	admin	0001_initial	2020-01-29 00:56:35.801958+01
+16	admin	0002_logentry_remove_auto_add	2020-01-29 00:56:35.812011+01
+17	admin	0003_logentry_add_action_flag_choices	2020-01-29 00:56:35.818996+01
+18	group	0001_initial	2020-01-29 00:56:35.83806+01
+19	group	0002_groupmembermodel_notifications	2020-01-29 00:56:35.85093+01
+20	group	0004_auto_20191103_1925	2020-01-29 00:56:35.858176+01
+21	group	0005_auto_20191103_1925	2020-01-29 00:56:35.866012+01
+22	group	0006_auto_20200109_1420	2020-01-29 00:56:35.874543+01
+23	members	0001_initial	2020-01-29 00:56:35.885062+01
+24	members	0002_memberverificationtokenmodel	2020-01-29 00:56:35.898726+01
+25	oweAuth	0002_user_dummy	2020-01-29 00:56:35.911049+01
+26	oweAuth	0003_user_verified	2020-01-29 00:56:35.921025+01
+27	reason	0001_initial	2020-01-29 00:56:35.943723+01
+28	penalty	0001_initial	2020-01-29 00:56:35.961825+01
+29	penalty	0002_penalty_multiplier	2020-01-29 00:56:35.978307+01
+30	penalty	0003_penalty_punishment	2020-01-29 00:56:35.989779+01
+31	penalty	0004_penalty_date	2020-01-29 00:56:36.001124+01
+32	penalty	0005_auto_20200117_2353	2020-01-29 00:56:36.023744+01
+33	penalty	0006_penaltyarchive_registereddate	2020-01-29 00:56:36.040802+01
+34	reason	0002_reason_punishment	2020-01-29 00:56:36.049476+01
+35	sessions	0001_initial	2020-01-29 00:56:36.055196+01
+36	slack	0001_initial	2020-02-02 15:03:25.525672+01
+37	slack	0002_auto_20200202_1451	2020-02-02 15:51:08.995766+01
+38	group	0007_groupmembermodel_slackname	2020-02-02 22:48:58.027745+01
+39	reason	0003_reasongroupmodel_slackshortcut	2020-02-06 23:15:08.580674+01
+40	oweAuth	0004_user_createdat	2020-03-16 21:12:38.199765+01
+41	oweAuth	0005_auto_20200316_2014	2020-03-16 21:14:40.745869+01
+43	images	0001_initial	2020-03-18 15:24:24.661125+01
+44	images	0002_auto_20200318_1432	2020-03-18 15:32:09.717721+01
+45	images	0003_auto_20200318_1515	2020-03-18 16:15:29.713477+01
+46	group	0008_group_groupimage	2020-03-18 16:55:30.046303+01
+47	group	0009_auto_20200321_1113	2020-03-21 12:13:27.223674+01
+48	slack	0003_slackteam_slack_access_token	2020-06-08 16:15:33.779124+02
+49	slack	0004_slackteam_sendmessagestochannelswhenmentioned	2020-06-08 23:02:57.931717+02
+50	group	0010_groupmembermodel_slackid	2020-06-09 00:21:40.549611+02
+51	oweAuth	0006_user_secret_admin_token	2020-08-16 00:38:30.742496+02
+52	group	0011_groupmembermodel_notificationtype	2020-08-20 12:22:47.078211+02
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+\.
+
+
+--
+-- Data for Name: group_group; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.group_group (name, id, "groupImage_id") FROM stdin;
+2.0	9f506f41-6ae8-4278-b7a9-42c4efbaecef	\N
+NTNUI Nerds	54d53f89-d9bb-4972-93e3-9db9057af38b	377655a6-8bc7-4577-b83a-5f3a98139f71
+four	117c38db-7706-4e54-889d-7deeeb856e14	\N
+New	85b43740-672c-4927-9aef-fe006df01fcd	f635efb7-d31f-423c-9d74-0b4e916fb18b
+Dev	430be9c8-4add-4abc-9b2b-98258c0f4fb5	d5d8e0d6-81e1-4ab7-bd6b-a4e8d8aab550
+\.
+
+
+--
+-- Data for Name: group_groupmembermodel; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.group_groupmembermodel (id, "groupAdmin", group_id, user_id, notifications, "notificationsEditingId", "slackName", "slackId", "notificationType") FROM stdin;
+43	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	667763fc-4664-408d-86ce-b3f1bca073e7	t	c94a8f61-8c28-44d5-b4e2-1b706fe4b76f			EM
+44	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	bd357ed8-d69a-43b1-b238-4ce7f8e48b72	t	9cc249d6-505f-483c-a669-25d2e57647d2			EM
+45	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	4f75e19a-56cf-4e6b-9bf3-63e0cc45017c	t	06bd6980-3bff-4c8b-a924-59d858da30e9			EM
+32	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	45ab4748-4272-43ee-96a3-b6be6ba45be5	t	e949b655-2889-4505-a0a5-3ee61487725e			EM
+33	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	306585fc-8c4a-4b14-9e64-6b1a648f9149	t	e6296edd-8990-4925-9d39-c20837b0a661		U014KNXNML7	EM
+34	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	a1779598-4232-4f5c-af8b-9f8a8b722b19	t	fd2bf8e0-d0ec-4af3-acd7-03836a6c1b04			EM
+36	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	59bad277-0324-4792-a6a3-39a90dfee2ad	t	fdc46cf3-f789-40ff-96c6-92ff546512f1			EM
+7	t	85b43740-672c-4927-9aef-fe006df01fcd	43a48a76-6b27-45ec-8386-2bfaf74599ba	t	d3fb228e-1380-47da-8dba-5dca7230042e			EM
+37	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	eeb04c30-6307-426d-b734-2a2e002799d3	t	b5475101-0df5-4e22-9a22-4bf31eccc2c1		UP14D1326	EM
+35	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	4f88b55c-ea79-4f23-a47c-eefd24c344eb	t	c1042abf-b66f-4e6b-b912-d9ae88f79299			EM
+31	f	9f506f41-6ae8-4278-b7a9-42c4efbaecef	1e55ad68-db37-4d0e-bbd9-57bb3da5616b	t	4cbbd49c-18aa-4d15-9582-d58a939924fb		USLACKBOT	EM
+1	t	430be9c8-4add-4abc-9b2b-98258c0f4fb5	43a48a76-6b27-45ec-8386-2bfaf74599ba	f	a986b435-6869-47cd-b5e3-216210bf58d0			EM
+6	t	54d53f89-d9bb-4972-93e3-9db9057af38b	43a48a76-6b27-45ec-8386-2bfaf74599ba	t	cd7950c9-4515-4809-9a81-c21dfe59cbee			EM
+8	t	117c38db-7706-4e54-889d-7deeeb856e14	43a48a76-6b27-45ec-8386-2bfaf74599ba	t	e23fa14a-f0f5-4f43-82e7-61949f12b32f			EM
+9	t	9f506f41-6ae8-4278-b7a9-42c4efbaecef	43a48a76-6b27-45ec-8386-2bfaf74599ba	t	2155e8d3-a64e-4cf7-b754-460595712bec		UP14D1326	SL
+\.
+
+
+--
+-- Data for Name: images_image; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.images_image (id, uploaded_at, upload) FROM stdin;
+d86902f3-d2ed-4dfb-b428-fda6956c71b5	2020-03-23 15:33:15.895789+01	d86902f3-d2ed-4dfb-b428-fda6956c71b5.jpg
+439b9b55-2659-4e02-b821-cc4a1a608231	2020-03-23 15:34:52.85465+01	
+abc7f3cf-1a3d-45e0-81ea-f0f1bc970901	2020-03-23 15:38:27.399055+01	abc7f3cf-1a3d-45e0-81ea-f0f1bc970901.jpg
+9cbfadc8-ec67-436a-9810-26ff2ff77d63	2020-03-23 15:39:39.2634+01	
+e8cd6f82-7266-4786-b233-d4d5e0fd716d	2020-03-23 15:39:53.839428+01	
+8b097c49-28fe-4442-bb5d-de2fd333e6e2	2020-03-23 15:40:28.271098+01	
+c494dca1-79b0-4cff-b48d-63b443f9e2bc	2020-03-23 15:54:11.406511+01	
+4ef89e72-607b-4244-bceb-5a4e0a30960d	2020-03-23 15:54:16.121667+01	
+97ec1374-c7de-4cec-89bd-952e9603c247	2020-03-23 16:20:31.445673+01	
+64cc7c9b-0895-498e-923f-501eca2bd117	2020-03-23 16:21:23.686217+01	
+42729c3e-445e-4b44-927f-965eb60ccc4a	2020-03-23 16:22:12.506848+01	
+377655a6-8bc7-4577-b83a-5f3a98139f71	2020-05-18 13:38:58.712783+02	377655a6-8bc7-4577-b83a-5f3a98139f71.png
+a1e3089c-f777-4580-ab83-50f00504179e	2020-05-19 17:10:57.21094+02	
+a2ffa8a8-e4bd-4a16-a02b-60af33352a17	2020-05-19 17:12:55.49343+02	
+25b604a2-11cf-4fa1-a477-66e814d0e0ff	2020-05-19 17:13:10.993453+02	
+254a5247-aaa8-412a-b0e0-db36c0a3a30b	2020-05-19 17:13:17.222456+02	
+f635efb7-d31f-423c-9d74-0b4e916fb18b	2020-05-19 17:13:17.224306+02	f635efb7-d31f-423c-9d74-0b4e916fb18b.jpg
+d2d4ddf4-058d-44c4-92b5-3149094e0ab0	2020-05-19 18:02:45.889025+02	
+033c1871-14e5-4c4f-a3f3-d6c970419361	2020-05-19 19:06:03.902246+02	
+d5d8e0d6-81e1-4ab7-bd6b-a4e8d8aab550	2020-05-19 19:06:03.903636+02	d5d8e0d6-81e1-4ab7-bd6b-a4e8d8aab550.jpg
+\.
+
+
+--
+-- Data for Name: members_membertokenmodel; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.members_membertokenmodel (id, token, date, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: members_memberverificationtokenmodel; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.members_memberverificationtokenmodel (id, token, date, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oweAuth_user; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public."oweAuth_user" (password, last_login, is_superuser, first_name, last_name, date_joined, id, name, email, is_active, is_staff, is_admin, dummy, verified, "createdAt", secret_admin_token) FROM stdin;
+	\N	f			2020-02-02 23:07:58.144126+01	cd39fa86-2092-48ac-ba8d-dcebb40443dd	Arne	jakob+arne@owe-it.com	t	f	f	t	f	2020-03-16 01:00:00+01	
+	\N	f			2020-02-02 23:08:07.614618+01	ee2af944-0d5d-439c-9874-a98e08fc7de9	Barns	jakob+barns@owe-it.com	t	f	f	t	f	2020-03-16 01:00:00+01	
+	\N	f			2020-06-09 18:52:33.529159+02	e57cb470-7142-4303-9c3b-22b4d2b261da	asdf	adsf	t	f	f	t	f	2020-06-09 18:52:33.529651+02	
+pbkdf2_sha256$150000$VViXO1LijQ7m$k59/L3Ew9bqpB+dH44+ULl/axf19iT4Zlok6+oHRqsg=	\N	f			2020-03-16 21:15:10.429385+01	05b5afe9-24b7-44ad-85d6-39ac30820672	Another one	jakob+another+one@owe-it.com	t	f	f	f	t	2020-03-16 21:15:45.322067+01	
+	\N	f			2020-06-09 16:24:57.645282+02	1b6a5172-905a-4174-83b4-aa7ef90a40fa	Darud	sandstorm@owe-it.com	t	f	f	t	f	2020-06-09 16:24:57.645475+02	
+	\N	f			2020-06-09 16:24:57.644599+02	1e55ad68-db37-4d0e-bbd9-57bb3da5616b	Lars	lars@owe-it.com	t	f	f	t	f	2020-06-09 16:24:57.644894+02	
+	\N	f			2020-06-09 16:26:39.974964+02	cd841cea-b017-499c-8316-5bf6d930c5fa	d	d@owe-it.com	t	f	f	t	f	2020-06-09 16:26:39.97518+02	
+	\N	f			2020-06-10 15:31:41.365546+02	b38ac860-88a1-4ca9-a390-0191531f2b38	dd	dddddd	t	f	f	t	f	2020-06-10 15:31:41.365755+02	
+	\N	f			2020-06-10 16:01:39.667972+02	59ae4713-600b-46b4-9c35-b85158942ba3	p	p	t	f	f	t	f	2020-06-10 16:01:39.668163+02	
+	\N	f			2020-06-09 16:40:43.812496+02	8c0bc60a-972d-4da6-be5b-d8436682768f	Tester	tt@owe-it.com	t	f	f	t	f	2020-06-09 16:40:43.81277+02	
+	\N	f			2020-06-09 16:41:35.893616+02	b3894f43-d01b-4522-832f-9051fb314363	jdog	jdog@owe-it.com	t	f	f	t	f	2020-06-09 16:41:35.893826+02	
+	\N	f			2020-06-09 16:46:29.742982+02	853d6c8e-93d9-450b-8035-44580035087d	dd	dd	t	f	f	t	f	2020-06-09 16:46:29.743191+02	
+	\N	f			2020-06-10 16:30:56.280002+02	45ab4748-4272-43ee-96a3-b6be6ba45be5	håkon	hakon@owe-it.com	t	f	f	t	f	2020-06-10 16:30:56.280239+02	
+	\N	f			2020-06-09 16:58:01.670984+02	bbe0e462-d1e2-4dac-aa66-8aa6d33e3787	a	s	t	f	f	t	f	2020-06-09 16:58:01.671252+02	
+	\N	f			2020-06-10 16:31:52.471211+02	306585fc-8c4a-4b14-9e64-6b1a648f9149	Tester	tester@owe-it.com	t	f	f	t	f	2020-06-10 16:31:52.471447+02	
+	\N	f			2020-06-09 16:59:03.69905+02	67c6552b-3ee5-4ef9-9a86-2784457fb2d5	e	e	t	f	f	t	f	2020-06-09 16:59:03.699248+02	
+	\N	f			2020-06-09 18:12:39.004724+02	4f88b55c-ea79-4f23-a47c-eefd24c344eb	a	a	t	f	f	t	f	2020-06-09 18:12:39.004947+02	
+	\N	f			2020-06-09 18:36:12.975568+02	5c41a152-626e-48d7-9060-7f44ef00a30f	b	b	t	f	f	t	f	2020-06-09 18:36:12.975781+02	
+	\N	f			2020-06-09 18:36:12.977213+02	a8b931da-340b-41bf-add3-ab5d188f58aa	t	t	t	f	f	t	f	2020-06-09 18:36:12.977533+02	
+	\N	f			2020-06-09 18:36:12.981406+02	a1779598-4232-4f5c-af8b-9f8a8b722b19	d	d	t	f	f	t	f	2020-06-09 18:36:12.983662+02	
+	\N	f			2020-06-09 18:36:12.984034+02	9de58d7f-bd5c-4311-8822-fce6de1f18f7	l	l	t	f	f	t	f	2020-06-09 18:36:12.984492+02	
+	\N	f			2020-06-09 18:36:12.98715+02	9c2eb084-37ba-492d-a839-1cf43d6e74af	k	k	t	f	f	t	f	2020-06-09 18:36:12.988992+02	
+	\N	f			2020-06-15 12:40:27.725372+02	eeb04c30-6307-426d-b734-2a2e002799d3	sss	sdav	t	f	f	t	f	2020-06-15 12:40:27.725574+02	
+	\N	f			2020-06-09 18:38:29.391048+02	f3ae6d8e-fee5-4dd5-89c4-5bf74d37d2b2	x	x	t	f	f	t	f	2020-06-09 18:38:29.391392+02	
+	\N	f			2020-06-09 18:50:19.069534+02	46e21970-7a38-4be0-b0ca-4bf122250adf	a	aasdf	t	f	f	t	f	2020-06-09 18:50:19.069792+02	
+pbkdf2_sha256$150000$u2oqe0cwpiGL$57+rEUJKjFGIxj2VOx9r0Bt0rDpV70ozkInREJxDLSY=	\N	f			2020-06-15 12:47:19.362112+02	bd357ed8-d69a-43b1-b238-4ce7f8e48b72	Admin Testesen	jakob+admin@owe-it.com	t	f	f	f	t	2020-06-15 12:47:37.755804+02	
+	\N	f			2020-06-09 18:50:39.57712+02	55052a16-3c80-45d8-8dbc-4b7e348bfa2a	d	sd	t	f	f	t	f	2020-06-09 18:50:39.577385+02	
+	\N	f			2020-06-09 18:52:33.524582+02	59bad277-0324-4792-a6a3-39a90dfee2ad	asdf	asdf	t	f	f	t	f	2020-06-09 18:52:33.524757+02	
+	\N	f			2020-06-15 12:56:05.596273+02	667763fc-4664-408d-86ce-b3f1bca073e7	aa	aa	t	f	f	t	f	2020-06-15 12:56:05.598309+02	
+	\N	f			2020-06-15 12:58:37.780903+02	4f75e19a-56cf-4e6b-9bf3-63e0cc45017c	bjørn	tore@owe-it.com	t	f	f	t	f	2020-06-15 12:58:37.782857+02	
+pbkdf2_sha256$150000$JluC9GVkoni1$6YzR4k4byrt81AqguVVVUFFmPYzSjNTULyEhKtTHp44=	\N	f			2020-01-29 00:59:38.761003+01	43a48a76-6b27-45ec-8386-2bfaf74599ba	Jakob LJ	jakob@owe-it.com	t	f	t	f	t	2020-08-16 00:44:30.354019+02	OJhk3RjWrDOW1mpTT0EidD6ppUiwsnsI=
+\.
+
+
+--
+-- Data for Name: oweAuth_user_groups; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public."oweAuth_user_groups" (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oweAuth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public."oweAuth_user_user_permissions" (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: penalty_penalty; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.penalty_penalty (id, group_id, reason_id, user_id, multiplier, punishment, date, archive_id) FROM stdin;
+2f6bbd71-9716-428d-833c-34dbe0d6409e	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-31	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+1dacdaf5-eb5d-4022-b6fb-eb7b479ccf2e	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-29	09c6b7f8-5456-4067-9a28-b32d4418dca2
+11def770-d315-4287-9f6f-c8cec83ccb19	54d53f89-d9bb-4972-93e3-9db9057af38b	b29f6a3a-cf68-4e8b-9950-4ad5cb8f45d5	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-05-18	\N
+97848348-ef9d-4bf3-a5a7-2fce7c132281	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-02	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+8fadb4da-78a0-4d04-a02f-6a7b7a9748cb	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+dccfd861-36e1-45b7-9713-06239a7e2b79	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-29	19e0f067-c911-4e11-9f17-b47eb05f163d
+b631e321-e7e2-4b30-a908-cf65ddb12672	\N	478764ec-45d3-48b4-8b22-d817f7528202	ee2af944-0d5d-439c-9874-a98e08fc7de9	1	1	2020-02-02	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+1cb04d92-fd2a-44ee-ba86-7831f4143e44	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+91cba385-929d-4de6-a209-61e636a9e67d	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+28fef24f-7db4-422a-a13f-22d4fde4f163	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+1c084d0c-908e-4e17-96d4-b72a17b3bdc4	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+1c440463-836e-4e51-a1f3-23794c944719	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+a4aae5f0-222f-4120-b8e0-ed3249b4cfdd	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+046c7230-251d-4820-8d67-76f1aba96833	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+0399d6d9-57a8-433a-99f6-43f93d190ce1	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+0163b681-32b7-4883-a3db-d857e55adcea	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+c864375f-4f2d-4067-8bb5-e6874ce7d6ac	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-30	a9cebb41-269d-4687-b46d-bc3bd7201912
+4daa2449-4d55-43a9-a471-efe76caea4da	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-30	a9cebb41-269d-4687-b46d-bc3bd7201912
+65983858-2005-493e-8dc3-7c7d60915ca8	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-30	a9cebb41-269d-4687-b46d-bc3bd7201912
+39159e25-8d1f-480e-940f-3ad5635271fc	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+988fb212-2e92-4f11-82b7-d8a4dd1a6d18	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+83eaeb87-c96a-4a3b-af4f-39f26a1173cf	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+a1f7bfd4-be2b-4aba-9361-3533c4a3968a	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+6b71a8bd-4283-4ea9-9b76-9368ee259f84	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+8b96c37c-0747-4456-9001-48a4f0e81201	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-30	3dd7541f-0c77-4760-a39a-8b16eac1543e
+d2cbf57a-04ca-45c4-84a7-e609727f9c2e	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-30	3dd7541f-0c77-4760-a39a-8b16eac1543e
+499a6d25-f0fa-4e95-a022-5d6a69ff349f	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-30	3dd7541f-0c77-4760-a39a-8b16eac1543e
+87791fa6-da57-4cd7-b4a9-cfd407ba126a	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+fb47551a-6de0-4b37-9457-068d08662c49	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-01-31	3d8c4bd6-8fb2-422e-ac80-594c2ca7251a
+f20215ea-d2ad-4242-bba4-f33453f62485	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+05e85969-cbd1-475f-9daa-d4f676726b7c	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+ae1bd5f2-b0fc-4371-a5e9-f502b0ba55fb	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+21b11395-9556-4dc1-86a3-cba85514a3d1	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+5f785def-d5ff-46f7-a027-00a3d6787a95	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+8f019500-16a4-4982-b7ae-498ceddfb118	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+3bd29944-d4b2-48e2-bb8c-d9d2fbaeaa69	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+5933951b-f3de-49a5-a2fe-5ae26888c178	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+25259a2f-7e2c-4146-b700-b65b57bb860c	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+cb1bf6c2-82f6-42aa-880d-ee0008d9f404	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+92cf1e3b-d64f-48ec-98c1-75e3b066c328	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+0d870005-f3a8-4cda-9d14-1a84a7e893ca	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+6c6d7cff-0c3e-4a18-84c4-6788c3582b03	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+b6c4b518-026b-4029-a01b-32cc7d16e308	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+26304723-6860-414d-9f8a-b882e5f35660	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+35b196ac-1fe4-4d90-b47c-c9904ec37b70	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+786f1257-2be4-449b-934d-79c2e1e7ed3c	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+d59068c3-320b-4479-bbf9-7b6b8823325b	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+cbcfa006-4309-44d6-890b-e83e9b9e9094	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+a77fd8a1-97c6-4292-9cc3-2d5b15591795	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+7a2d2b70-644b-46af-a074-d96b458fcfb0	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+58fdeba2-7b2e-460f-9d96-edb722fbcb44	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+6b6cec3b-93d7-40a3-8fee-474f28f90a05	54d53f89-d9bb-4972-93e3-9db9057af38b	b29f6a3a-cf68-4e8b-9950-4ad5cb8f45d5	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-05-18	\N
+85fbe042-d64b-499c-8314-2f26ef422212	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+ff25592a-c8e6-49ff-82fa-ed4635dd1b2c	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+40a1f11a-2bb5-4449-8f28-9b9e35f238aa	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+fe16efc4-51f8-433a-81b8-4564ad10c5ed	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+96b7a0d0-24bf-423b-a53d-8278c56603a1	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+15aca620-20e3-460f-b32d-35eb7d212028	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+02db4514-d08e-44cd-9330-fd7e01f0ff96	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+04e573d2-eb74-4a4f-9be8-308bd157ef18	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+56a7f19b-cbbc-4e10-988a-56fe83da8b37	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+f0bbf385-d4c0-4f51-931e-10ada2c13c62	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+f8501a60-8258-42d6-bf8f-09a040d35218	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+10bfbff6-a341-4776-a4b2-715506e13801	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-08-20	\N
+d2802834-42b6-4471-abd6-ba816368ddc9	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+c1946780-9892-4526-bb6a-802ff55975e2	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+1972ea71-ae3c-4292-ac53-c453d43c36b0	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+7f2beb12-f9ab-4246-9651-ff159853f99c	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+560010ce-5456-41c8-97e8-85e5c9cab868	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+6088c5ba-b784-418d-918d-25f67bce4c0a	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+bd0e327c-801a-445d-954a-e62a675ce418	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+f9a592d5-c3a7-4965-b6a4-d83f1481dd7a	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+82c965df-ac59-4f8f-8b1a-058675c5a45e	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+98584ec8-257d-472e-be01-a7ec597e791e	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+7f88e43a-0114-4759-b6de-bdf26cc06499	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+20c3e75d-3b3c-4343-a8c6-5a5abb7fbec4	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+c368bdcd-0ec0-447c-bba3-f5432824b2e0	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+99120425-4bed-446b-8f51-482d60fc8b1c	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-06	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+72f04e39-caf0-4a60-b651-30ccd21c5966	\N	f5a35782-f998-457a-97da-e43804b35779	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+1cb9d050-6a3e-4429-9f5b-b2434e3c8671	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+eaceed0f-ad07-4d3a-a279-c67d873af1c9	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+601a7450-9960-446e-9a87-50abdd085165	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+3f8db6e7-5d43-4369-bf29-9284bb93c587	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+0bb64698-defd-40cd-81af-1ee2ccd08e2f	\N	478764ec-45d3-48b4-8b22-d817f7528202	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+d6c67a16-65fd-4086-8e5b-d30d35cc414b	\N	f5a35782-f998-457a-97da-e43804b35779	43a48a76-6b27-45ec-8386-2bfaf74599ba	1	1	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974
+\.
+
+
+--
+-- Data for Name: penalty_penaltyarchive; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.penalty_penaltyarchive ("startDate", "endDate", id, "createdBy_id", group_id, "registeredDate") FROM stdin;
+2020-01-29	2020-01-01	09c6b7f8-5456-4067-9a28-b32d4418dca2	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-29
+2020-01-30	2020-01-30	d9d929c2-f34f-42f7-8d4a-9f71fcb44c5d	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-29
+2020-01-30	2020-01-25	19e0f067-c911-4e11-9f17-b47eb05f163d	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-30
+2020-02-01	2020-01-01	a9cebb41-269d-4687-b46d-bc3bd7201912	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-30
+2020-03-03	2020-01-03	0797ac22-d135-4bb1-896f-3aae2dcf7a8a	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-30
+2020-02-02	2020-02-20	3dd7541f-0c77-4760-a39a-8b16eac1543e	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-30
+2020-01-01	2020-01-31	3d8c4bd6-8fb2-422e-ac80-594c2ca7251a	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-01-01	2020-01-31	9fb2e2b8-ce1c-4712-a732-13868ae00598	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-01-20	2020-01-31	b7294e35-00aa-4236-af21-b30825a4a7b6	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-01-31	2020-01-31	04787318-013a-4587-a6bc-179332b2f33b	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-01-31	2020-01-31	4899e15e-89ed-40cd-b720-f33239dfb402	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-01-21	2020-01-31	c3df6500-f4d5-43d7-bc17-30e619c96728	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-01-01	2020-01-31	0660f747-a032-45b8-81e6-71c20601ece1	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-01-31
+2020-02-02	2020-02-07	ba214b27-e7cf-4ecc-aeb3-9e215197f974	43a48a76-6b27-45ec-8386-2bfaf74599ba	430be9c8-4add-4abc-9b2b-98258c0f4fb5	2020-02-07
+\.
+
+
+--
+-- Data for Name: reason_reason; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.reason_reason (ranking, name, text, id, punishment) FROM stdin;
+0	Være marcus	Marcus er 10/10	478764ec-45d3-48b4-8b22-d817f7528202	1
+0	Ikke være Marcus	da er man dust	f5a35782-f998-457a-97da-e43804b35779	1
+0	Være matsen		992e7bd3-8c1a-46d2-b495-cba2aca7e748	1
+0	Ikke være slack-integrerrt		b7e08288-f767-48fe-95ad-bea787c8bac8	1
+0	a		f550bcac-dd0e-4b76-80a6-6fd776b8e1a9	1
+0	b		e9a8a38a-2108-47dc-a5f3-5f457287e02f	1
+0	dd		b29f6a3a-cf68-4e8b-9950-4ad5cb8f45d5	1
+0	DD		6ed0585e-44ba-4146-8c91-240f465dabee	1
+\.
+
+
+--
+-- Data for Name: reason_reasongroupmodel; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.reason_reasongroupmodel (id, date, group_id, reason_id, "slackShortCut") FROM stdin;
+1	2020-01-29	430be9c8-4add-4abc-9b2b-98258c0f4fb5	478764ec-45d3-48b4-8b22-d817f7528202	late
+2	2020-02-06	430be9c8-4add-4abc-9b2b-98258c0f4fb5	f5a35782-f998-457a-97da-e43804b35779	marc
+3	2020-02-07	430be9c8-4add-4abc-9b2b-98258c0f4fb5	992e7bd3-8c1a-46d2-b495-cba2aca7e748	bematsen
+8	2020-05-18	54d53f89-d9bb-4972-93e3-9db9057af38b	b29f6a3a-cf68-4e8b-9950-4ad5cb8f45d5	
+9	2020-08-20	9f506f41-6ae8-4278-b7a9-42c4efbaecef	6ed0585e-44ba-4146-8c91-240f465dabee	s
+\.
+
+
+--
+-- Data for Name: slack_slackteam; Type: TABLE DATA; Schema: public; Owner: oweituser
+--
+
+COPY public.slack_slackteam ("teamId", "teamName", group_id, "createdDate", "slackAuthedUser", "createByUser_id", slack_access_token, "sendMessagesToChannelsWhenMentioned") FROM stdin;
+9f506f41-6ae8-4278-b7a9-42c4efbaecef		9f506f41-6ae8-4278-b7a9-42c4efbaecef	2020-08-20	jakob	43a48a76-6b27-45ec-8386-2bfaf74599ba	xoxb-789494311393-931894193744-uhsKmvNeKslkD6HF31jGCTrf	t
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 64, true);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 16, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 52, true);
+
+
+--
+-- Name: group_groupmembermodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.group_groupmembermodel_id_seq', 45, true);
+
+
+--
+-- Name: members_membertokenmodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.members_membertokenmodel_id_seq', 1, false);
+
+
+--
+-- Name: members_memberverificationtokenmodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.members_memberverificationtokenmodel_id_seq', 1, true);
+
+
+--
+-- Name: oweAuth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public."oweAuth_user_groups_id_seq"', 1, false);
+
+
+--
+-- Name: oweAuth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public."oweAuth_user_user_permissions_id_seq"', 1, false);
+
+
+--
+-- Name: reason_reasongroupmodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: oweituser
+--
+
+SELECT pg_catalog.setval('public.reason_reasongroupmodel_id_seq', 9, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: group_group group_group_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_group
+    ADD CONSTRAINT group_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: group_groupmembermodel group_groupmembermodel_notificationsEditingId_58e393d2_uniq; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_groupmembermodel
+    ADD CONSTRAINT "group_groupmembermodel_notificationsEditingId_58e393d2_uniq" UNIQUE ("notificationsEditingId");
+
+
+--
+-- Name: group_groupmembermodel group_groupmembermodel_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_groupmembermodel
+    ADD CONSTRAINT group_groupmembermodel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: images_image images_image_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.images_image
+    ADD CONSTRAINT images_image_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: members_membertokenmodel members_membertokenmodel_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.members_membertokenmodel
+    ADD CONSTRAINT members_membertokenmodel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: members_memberverificationtokenmodel members_memberverificationtokenmodel_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.members_memberverificationtokenmodel
+    ADD CONSTRAINT members_memberverificationtokenmodel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oweAuth_user oweAuth_user_email_key; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user"
+    ADD CONSTRAINT "oweAuth_user_email_key" UNIQUE (email);
+
+
+--
+-- Name: oweAuth_user_groups oweAuth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_groups"
+    ADD CONSTRAINT "oweAuth_user_groups_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: oweAuth_user_groups oweAuth_user_groups_user_id_group_id_0c0d5ebf_uniq; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_groups"
+    ADD CONSTRAINT "oweAuth_user_groups_user_id_group_id_0c0d5ebf_uniq" UNIQUE (user_id, group_id);
+
+
+--
+-- Name: oweAuth_user oweAuth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user"
+    ADD CONSTRAINT "oweAuth_user_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: oweAuth_user_user_permissions oweAuth_user_user_permis_user_id_permission_id_7a6f1083_uniq; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_user_permissions"
+    ADD CONSTRAINT "oweAuth_user_user_permis_user_id_permission_id_7a6f1083_uniq" UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: oweAuth_user_user_permissions oweAuth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_user_permissions"
+    ADD CONSTRAINT "oweAuth_user_user_permissions_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: penalty_penalty penalty_penalty_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penalty
+    ADD CONSTRAINT penalty_penalty_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: penalty_penaltyarchive penalty_penaltyarchive_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penaltyarchive
+    ADD CONSTRAINT penalty_penaltyarchive_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reason_reason reason_reason_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.reason_reason
+    ADD CONSTRAINT reason_reason_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reason_reasongroupmodel reason_reasongroupmodel_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.reason_reasongroupmodel
+    ADD CONSTRAINT reason_reasongroupmodel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: slack_slackteam slack_slackteam_pkey; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.slack_slackteam
+    ADD CONSTRAINT slack_slackteam_pkey PRIMARY KEY (group_id);
+
+
+--
+-- Name: slack_slackteam slack_slackteam_teamId_key; Type: CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.slack_slackteam
+    ADD CONSTRAINT "slack_slackteam_teamId_key" UNIQUE ("teamId");
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: group_group_groupImage_id_e694dbbb; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "group_group_groupImage_id_e694dbbb" ON public.group_group USING btree ("groupImage_id");
+
+
+--
+-- Name: group_groupmembermodel_group_id_81ae42c8; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX group_groupmembermodel_group_id_81ae42c8 ON public.group_groupmembermodel USING btree (group_id);
+
+
+--
+-- Name: group_groupmembermodel_user_id_1b3f1bee; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX group_groupmembermodel_user_id_1b3f1bee ON public.group_groupmembermodel USING btree (user_id);
+
+
+--
+-- Name: members_membertokenmodel_user_id_3c5e556e; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX members_membertokenmodel_user_id_3c5e556e ON public.members_membertokenmodel USING btree (user_id);
+
+
+--
+-- Name: members_memberverificationtokenmodel_user_id_6d8de4d2; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX members_memberverificationtokenmodel_user_id_6d8de4d2 ON public.members_memberverificationtokenmodel USING btree (user_id);
+
+
+--
+-- Name: oweAuth_user_email_3ad65ac7_like; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "oweAuth_user_email_3ad65ac7_like" ON public."oweAuth_user" USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: oweAuth_user_groups_group_id_16f28321; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "oweAuth_user_groups_group_id_16f28321" ON public."oweAuth_user_groups" USING btree (group_id);
+
+
+--
+-- Name: oweAuth_user_groups_user_id_7955c7ce; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "oweAuth_user_groups_user_id_7955c7ce" ON public."oweAuth_user_groups" USING btree (user_id);
+
+
+--
+-- Name: oweAuth_user_user_permissions_permission_id_5a31208b; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "oweAuth_user_user_permissions_permission_id_5a31208b" ON public."oweAuth_user_user_permissions" USING btree (permission_id);
+
+
+--
+-- Name: oweAuth_user_user_permissions_user_id_410bb0d7; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "oweAuth_user_user_permissions_user_id_410bb0d7" ON public."oweAuth_user_user_permissions" USING btree (user_id);
+
+
+--
+-- Name: penalty_penalty_archive_id_7f38469d; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX penalty_penalty_archive_id_7f38469d ON public.penalty_penalty USING btree (archive_id);
+
+
+--
+-- Name: penalty_penalty_group_id_37b91f26; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX penalty_penalty_group_id_37b91f26 ON public.penalty_penalty USING btree (group_id);
+
+
+--
+-- Name: penalty_penalty_reason_id_f56f703a; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX penalty_penalty_reason_id_f56f703a ON public.penalty_penalty USING btree (reason_id);
+
+
+--
+-- Name: penalty_penalty_user_id_6ef29eb7; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX penalty_penalty_user_id_6ef29eb7 ON public.penalty_penalty USING btree (user_id);
+
+
+--
+-- Name: penalty_penaltyarchive_createdBy_id_feba0d69; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "penalty_penaltyarchive_createdBy_id_feba0d69" ON public.penalty_penaltyarchive USING btree ("createdBy_id");
+
+
+--
+-- Name: penalty_penaltyarchive_group_id_3a2c6692; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX penalty_penaltyarchive_group_id_3a2c6692 ON public.penalty_penaltyarchive USING btree (group_id);
+
+
+--
+-- Name: reason_reasongroupmodel_group_id_5950be11; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX reason_reasongroupmodel_group_id_5950be11 ON public.reason_reasongroupmodel USING btree (group_id);
+
+
+--
+-- Name: reason_reasongroupmodel_reason_id_84053ac9; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX reason_reasongroupmodel_reason_id_84053ac9 ON public.reason_reasongroupmodel USING btree (reason_id);
+
+
+--
+-- Name: slack_slackteam_createByUser_id_d68c6edf; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "slack_slackteam_createByUser_id_d68c6edf" ON public.slack_slackteam USING btree ("createByUser_id");
+
+
+--
+-- Name: slack_slackteam_teamId_740c1d6a_like; Type: INDEX; Schema: public; Owner: oweituser
+--
+
+CREATE INDEX "slack_slackteam_teamId_740c1d6a_like" ON public.slack_slackteam USING btree ("teamId" varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT "django_admin_log_user_id_c564eba6_fk_oweAuth_user_id" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_group group_group_groupImage_id_e694dbbb_fk_images_image_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_group
+    ADD CONSTRAINT "group_group_groupImage_id_e694dbbb_fk_images_image_id" FOREIGN KEY ("groupImage_id") REFERENCES public.images_image(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_groupmembermodel group_groupmembermodel_group_id_81ae42c8_fk_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_groupmembermodel
+    ADD CONSTRAINT group_groupmembermodel_group_id_81ae42c8_fk_group_group_id FOREIGN KEY (group_id) REFERENCES public.group_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_groupmembermodel group_groupmembermodel_user_id_1b3f1bee_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.group_groupmembermodel
+    ADD CONSTRAINT "group_groupmembermodel_user_id_1b3f1bee_fk_oweAuth_user_id" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: members_membertokenmodel members_membertokenmodel_user_id_3c5e556e_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.members_membertokenmodel
+    ADD CONSTRAINT "members_membertokenmodel_user_id_3c5e556e_fk_oweAuth_user_id" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: members_memberverificationtokenmodel members_memberverifi_user_id_6d8de4d2_fk_oweAuth_u; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.members_memberverificationtokenmodel
+    ADD CONSTRAINT "members_memberverifi_user_id_6d8de4d2_fk_oweAuth_u" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oweAuth_user_groups oweAuth_user_groups_group_id_16f28321_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_groups"
+    ADD CONSTRAINT "oweAuth_user_groups_group_id_16f28321_fk_auth_group_id" FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oweAuth_user_groups oweAuth_user_groups_user_id_7955c7ce_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_groups"
+    ADD CONSTRAINT "oweAuth_user_groups_user_id_7955c7ce_fk_oweAuth_user_id" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oweAuth_user_user_permissions oweAuth_user_user_pe_permission_id_5a31208b_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_user_permissions"
+    ADD CONSTRAINT "oweAuth_user_user_pe_permission_id_5a31208b_fk_auth_perm" FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oweAuth_user_user_permissions oweAuth_user_user_pe_user_id_410bb0d7_fk_oweAuth_u; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public."oweAuth_user_user_permissions"
+    ADD CONSTRAINT "oweAuth_user_user_pe_user_id_410bb0d7_fk_oweAuth_u" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: penalty_penalty penalty_penalty_archive_id_7f38469d_fk_penalty_p; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penalty
+    ADD CONSTRAINT penalty_penalty_archive_id_7f38469d_fk_penalty_p FOREIGN KEY (archive_id) REFERENCES public.penalty_penaltyarchive(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: penalty_penalty penalty_penalty_group_id_37b91f26_fk_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penalty
+    ADD CONSTRAINT penalty_penalty_group_id_37b91f26_fk_group_group_id FOREIGN KEY (group_id) REFERENCES public.group_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: penalty_penalty penalty_penalty_reason_id_f56f703a_fk_reason_reason_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penalty
+    ADD CONSTRAINT penalty_penalty_reason_id_f56f703a_fk_reason_reason_id FOREIGN KEY (reason_id) REFERENCES public.reason_reason(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: penalty_penalty penalty_penalty_user_id_6ef29eb7_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penalty
+    ADD CONSTRAINT "penalty_penalty_user_id_6ef29eb7_fk_oweAuth_user_id" FOREIGN KEY (user_id) REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: penalty_penaltyarchive penalty_penaltyarchive_createdBy_id_feba0d69_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penaltyarchive
+    ADD CONSTRAINT "penalty_penaltyarchive_createdBy_id_feba0d69_fk_oweAuth_user_id" FOREIGN KEY ("createdBy_id") REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: penalty_penaltyarchive penalty_penaltyarchive_group_id_3a2c6692_fk_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.penalty_penaltyarchive
+    ADD CONSTRAINT penalty_penaltyarchive_group_id_3a2c6692_fk_group_group_id FOREIGN KEY (group_id) REFERENCES public.group_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: reason_reasongroupmodel reason_reasongroupmodel_group_id_5950be11_fk_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.reason_reasongroupmodel
+    ADD CONSTRAINT reason_reasongroupmodel_group_id_5950be11_fk_group_group_id FOREIGN KEY (group_id) REFERENCES public.group_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: reason_reasongroupmodel reason_reasongroupmodel_reason_id_84053ac9_fk_reason_reason_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.reason_reasongroupmodel
+    ADD CONSTRAINT reason_reasongroupmodel_reason_id_84053ac9_fk_reason_reason_id FOREIGN KEY (reason_id) REFERENCES public.reason_reason(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: slack_slackteam slack_slackteam_createByUser_id_d68c6edf_fk_oweAuth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.slack_slackteam
+    ADD CONSTRAINT "slack_slackteam_createByUser_id_d68c6edf_fk_oweAuth_user_id" FOREIGN KEY ("createByUser_id") REFERENCES public."oweAuth_user"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: slack_slackteam slack_slackteam_group_id_2728a20c_fk_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: oweituser
+--
+
+ALTER TABLE ONLY public.slack_slackteam
+    ADD CONSTRAINT slack_slackteam_group_id_2728a20c_fk_group_group_id FOREIGN KEY (group_id) REFERENCES public.group_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
