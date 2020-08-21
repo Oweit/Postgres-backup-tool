@@ -12,4 +12,4 @@ pg_dump $db > backup/"$(date +'%Y-%m-%d')".bak" > backup.sh
 
 chmod +x backup.sh
 rm init.sh
-rm -r .git/
+sudo rm -r .git/
